@@ -14,7 +14,7 @@
       <td><%= video.title %></td>
       <td><%= video.youtubeId %></td>
       <td><%= video.timestamp %></td>
-      <td><%= link_to 'show' , video_path(video) %></td>
+      <td><%= link_to 'show' , video_path(video.id) %></td>
     </tr>
   <% end %>
 </table>
