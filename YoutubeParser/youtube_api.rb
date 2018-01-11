@@ -7,6 +7,8 @@ require 'googleauth/stores/file_token_store'
 
 require 'fileutils'
 require 'json'
+require 'csv'
+require 'time'
 
 # REPLACE WITH VALID REDIRECT_URI FOR YOUR CLIENT
 REDIRECT_URI = 'http://localhost'
@@ -48,17 +50,33 @@ service = Google::Apis::YoutubeV3::YouTubeService.new
 service.client_options.application_name = APPLICATION_NAME
 service.authorization = authorize
 
-ids=""
-counter=0
-File.open("video_id_list.txt","r").each do |f|
-  f.each_line do |line|
-    ids += line.chomp!+","
-    counter +=1
-  end
-  if counter.equal?49
-    break
-  end
+CSV.open("data.csv","wb") do |csv|
+  csv << ["title","id","commentCount","dislikeCount","likeCount","viewCount","channelId","channelTitle","timestamp"]
 end
-
-response = service.list_videos( 'snippet,contentDetails,statistics' , id: ids )
-File.open("response.JSON","w").puts (JSON.pretty_generate( JSON.parse( response.to_json ) ) )
+counter =1 
+File.open("video_id_list.txt","r").each do |f|
+  response = service.list_videos( 'snippet,contentDetails,statistics' , id: f )
+  f.chomp!
+  snippet=JSON.parse( response.to_json ).fetch("items")[0].fetch("snippet")
+  statistics=JSON.parse( response.to_json ).fetch("items")[0].fetch("statistics")
+  commentCount=statistics.fetch("commentCount")
+  dislikeCount=statistics.fetch("dislikeCount")
+  likeCount=statistics.fetch("likeCount")
+  viewCount=statistics.fetch("viewCount")
+  title=snippet.fetch("title")
+  channelId=snippet.fetch("channelId")
+  channelTitle=snippet.fetch("channelTitle")
+  publishedAt=snippet.fetch("publishedAt").partition("T")
+  year=publishedAt[0].partition("-")[0]
+  month=publishedAt[0].partition("-")[2].partition("-")[0]
+  day=publishedAt[0].partition("-")[2].partition("-")[2]
+  hour=publishedAt[2].partition(".")[0].partition(":")[0]
+  minute=publishedAt[2].partition(".")[0].partition(":")[2].partition(":")[0]
+  second=publishedAt[2].partition(".")[0].partition(":")[2].partition(":")[2]
+  timestamp=Time.new( year , month , day , hour , minute , second , "+00:00").to_i
+  CSV.open("data.csv","a+") do |csv|
+    csv <<[title,f,commentCount,dislikeCount,likeCount,viewCount,channelId,channelTitle,timestamp]
+  end
+  puts counter
+  counter +=1
+end
