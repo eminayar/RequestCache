@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  youtubeId: MyString
+  commentCount: 1
+  dislikeCount: 1
+  likeCount: 1
+  viewCount: 1
+  channelId: MyString
+  channelTitle: MyString
+  timestamp: 1
+
+two:
+  title: MyString
+  youtubeId: MyString
+  commentCount: 1
+  dislikeCount: 1
+  likeCount: 1
+  viewCount: 1
+  channelId: MyString
+  channelTitle: MyString
+  timestamp: 1

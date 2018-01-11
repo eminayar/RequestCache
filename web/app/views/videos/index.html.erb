@@ -1,0 +1,23 @@
+<h1>PAGE <%= @pagenum %> </h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Youtube_id</th>
+    <th>timestamp</th>
+  </tr>
+
+  <% @videos.each do |video| %>
+    <tr>
+      <td><%= video.id %></td>
+      <td><%= video.title %></td>
+      <td><%= video.youtubeId %></td>
+      <td><%= video.timestamp %></td>
+      <td><%= link_to 'show' , video_path(video) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'previous page' , controller: "videos" , action: "index" , timestamp: @prev %> |
+<%= link_to 'next page' , controller: "videos" , action: "index" , timestamp: @next %>

@@ -1,0 +1,51 @@
+<p>
+  <strong>Id:</strong>
+  <%= @video.id %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @video.title %>
+</p>
+
+<p>
+  <strong>YoutubeId:</strong>
+  <%= @video.youtubeId %>
+</p>
+
+<p>
+  <strong>CommentCount:</strong>
+  <%= @video.commentCount %>
+</p>
+
+<p>
+  <strong>DislikeCount:</strong>
+  <%= @video.dislikeCount %>
+</p>
+
+<p>
+  <strong>LikeCount:</strong>
+  <%= @video.likeCount %>
+</p>
+
+<p>
+  <strong>ViewCount:</strong>
+  <%= @video.viewCount %>
+</p>
+
+<p>
+  <strong>ChannelId:</strong>
+  <%= @video.channelId %>
+</p>
+
+<p>
+  <strong>ChannelTitle:</strong>
+  <%= @video.channelTitle %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @video.timestamp %>
+</p>
+
+<%= link_to 'back' , controller: "videos" , action: "index" , timestamp: @goto %>
