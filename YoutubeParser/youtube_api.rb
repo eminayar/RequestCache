@@ -51,7 +51,7 @@ service.client_options.application_name = APPLICATION_NAME
 service.authorization = authorize
 
 CSV.open("data.csv","wb") do |csv|
-  csv << ["title","id","commentCount","dislikeCount","likeCount","viewCount","channelId","channelTitle","timestamp"]
+  csv << ["title","youtubeId","commentCount","dislikeCount","likeCount","viewCount","channelId","channelTitle","timestamp"]
 end
 counter =1 
 File.open("video_id_list.txt","r").each do |f|
