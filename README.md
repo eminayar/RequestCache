@@ -8,3 +8,5 @@
 * To test youtube parser you need to download your own *client secret* file from google api services.
 1. Go to web/
 2. Run `rails server`
+3. Run `rake db:migrate`
+4. Open your web browser and type `localhost:3000`
