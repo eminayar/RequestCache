@@ -7,4 +7,4 @@
 ## How to run
 * To test youtube parser you need to download your own *client secret* file from google api services.
 1. Go to web/
-2. 'rails server'
+2. Run `rails server`
